@@ -6,7 +6,7 @@ class Runner {
 
 	private $working_directory;
 
-	public function __constrict( $working_directory ) {
+	public function __construct( $working_directory ) {
 		$this->working_directory = $working_directory;
 		$this->ensure_directory_exists();
 	}
@@ -51,7 +51,7 @@ class Runner {
 
 	public function run_tasks() {
 		if ( ! chdir( $this->working_directory ) ) {
-			trigger_error( 'Error when changing directory', E_USER_ERROR );
+			trigger_error( "Error when changing directory to $this->working_directory", E_USER_ERROR );
 		}
 
 		echo 'cd ', getcwd(), "\n";
