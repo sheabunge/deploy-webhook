@@ -16,13 +16,9 @@ if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
 	trigger_error( 'Could not find working directory', E_USER_ERROR );
 }
 
-if ( ! isset( $_POST['payload'] ) ) {
-	trigger_error( 'Payload not provided', E_USER_ERROR );
-}
+$webhook = new Webhook();
 
-$payload = json_decode( $_POST['payload'] );
-
-if ( empty( $payload->hook->config->secret ) || SECRET_TOKEN !== $payload->hook->config->secret ) {
+if ( ! $webhook->validate_secret( SECRET_TOKEN ) ) {
 	trigger_error( 'Incorrect secret.', E_USER_ERROR );
 }
 
