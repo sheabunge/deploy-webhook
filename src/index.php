@@ -22,7 +22,7 @@ if ( ! isset( $_POST['payload'] ) ) {
 
 $payload = json_decode( $_POST['payload'] );
 
-if ( empty( $payload['hook']['config']['secret'] ) || SECRET_TOKEN !== $payload['hook']['config']['secret'] ) {
+if ( empty( $payload->hook->config->secret ) || SECRET_TOKEN !== $payload->hook->config->secret ) {
 	trigger_error( 'Incorrect secret.', E_USER_ERROR );
 }
 
