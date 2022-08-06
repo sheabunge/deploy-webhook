@@ -17,5 +17,7 @@
             "email": "shea@sheabunge.com"
         }
     ],
-    "require": {}
+    "require": {
+        "ext-json": "*"
+    }
 }
