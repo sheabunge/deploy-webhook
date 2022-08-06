@@ -2,10 +2,12 @@
 
 namespace Shea\DeployWebhook;
 
+ini_set( 'display_errors', 'On' );
+
 require __DIR__ . '../vendor/autoload.php';
 
 if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
-	trigger_error( "Could not find working directory" );
+	trigger_error( 'Could not find working directory' );
 	return;
 }
 
