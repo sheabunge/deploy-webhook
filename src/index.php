@@ -18,7 +18,7 @@ if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
 
 $webhook = new Webhook();
 
-if ( ! $webhook->validate_secret( SECRET_TOKEN ) ) {
+if ( ! $webhook->verify_signature( SECRET_TOKEN ) ) {
 	trigger_error( 'Incorrect secret.', E_USER_ERROR );
 }
 

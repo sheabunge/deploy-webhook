@@ -12,8 +12,8 @@ class Webhook {
 		json_decode( $_POST['payload'] );
 	}
 
-	public function validate_secret( $secret_token ) {
-		return isset( $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ) &&
-		       $_SERVER['HTTP_X_HUB_SIGNATURE_256'] === 'sha256=' . hash( 'sha256', $secret_token );
+	public function verify_signature( $secret_token ) {
+		$signature = hash_hmac( 'sha256', $_POST['payload'], $secret_token );
+		return isset( $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ) && $_SERVER['HTTP_X_HUB_SIGNATURE_256'] === 'sha256=' . $signature;
 	}
 }
