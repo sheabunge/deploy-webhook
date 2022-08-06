@@ -7,9 +7,10 @@ ini_set( 'display_errors', 'On' );
 require dirname( __DIR__ ) . '/vendor/autoload.php';
 
 function run_command( $command ) {
-	echo '<p><code>', htmlentities( $command ), '</code></p>';
-	exec( $command, $output );
-	echo '<p><pre>', print_r( $output, true ), '</pre></p>';
+	echo "\n$ ", htmlentities( $command ), "\n";
+	exec( $command, $output, $result );
+	echo print_r( $output, true );
+	echo "\n$result\n";
 }
 
 if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
@@ -19,7 +20,7 @@ if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
 $webhook = new Webhook( SECRET_TOKEN );
 $webhook->verify_signature();
 
-printf( '<p>Changing directory to <code>%s</code>', htmlentities( WORKING_DIR ) );
+echo 'Changing directory to ', WORKING_DIR, "\n";
 if ( ! chdir( WORKING_DIR ) ) {
 	trigger_error( 'Error when changing directory', E_USER_ERROR );
 }
