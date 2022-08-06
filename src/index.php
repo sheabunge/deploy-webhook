@@ -8,9 +8,7 @@ require dirname( __DIR__ ) . '/vendor/autoload.php';
 
 function run_command( $command ) {
 	echo "\n$ ", htmlentities( $command ), "\n";
-	exec( $command, $output, $result );
-	echo print_r( $output, true );
-	echo "\n$result\n";
+	passthru( $command );
 }
 
 if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
