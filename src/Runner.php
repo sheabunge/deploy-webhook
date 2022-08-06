@@ -54,7 +54,7 @@ class Runner {
 			trigger_error( "Error when changing directory to $this->working_directory", E_USER_ERROR );
 		}
 
-		echo 'cd ', getcwd(), "\n";
+		echo '$ cd ', getcwd(), "\n";
 		$this->git();
 		$this->composer();
 		$this->npm();
