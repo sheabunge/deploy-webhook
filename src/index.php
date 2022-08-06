@@ -17,6 +17,7 @@ if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
 }
 
 $webhook = new Webhook( SECRET_TOKEN );
+$webhook->verify_signature();
 
 printf( '<p>Changing directory to <code>%s</code>', htmlentities( WORKING_DIR ) );
 if ( ! chdir( WORKING_DIR ) ) {
