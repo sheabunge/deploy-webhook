@@ -16,11 +16,7 @@ if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
 	trigger_error( 'Could not find working directory', E_USER_ERROR );
 }
 
-$webhook = new Webhook();
-
-if ( ! $webhook->verify_signature( SECRET_TOKEN ) ) {
-	trigger_error( 'Incorrect secret.', E_USER_ERROR );
-}
+$webhook = new Webhook( SECRET_TOKEN );
 
 printf( '<p>Changing directory to <code>%s</code>', htmlentities( WORKING_DIR ) );
 if ( ! chdir( WORKING_DIR ) ) {
