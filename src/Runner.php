@@ -50,11 +50,11 @@ class Runner {
 	}
 
 	public function run_tasks() {
-		echo 'Changing directory to ', $this->working_directory, "\n";
 		if ( ! chdir( $this->working_directory ) ) {
 			trigger_error( 'Error when changing directory', E_USER_ERROR );
 		}
 
+		echo 'cd ', getcwd(), "\n";
 		$this->git();
 		$this->composer();
 		$this->npm();
