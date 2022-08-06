@@ -17,7 +17,7 @@ class Webhook {
 	}
 
 	public function get_event() {
-		return isset( $_SERVER['X-GitHub-Event'] ) ? $_SERVER['X-GitHub-Event'] : null;
+		return isset( $_SERVER['HTTP_X_GITHUB_EVENT'] ) ? $_SERVER['HTTP_X_GITHUB_EVENT'] : null;
 	}
 
 	public function get_signature() {
