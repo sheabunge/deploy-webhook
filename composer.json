@@ -1,0 +1,21 @@
+{
+    "name": "sheabunge/deploy-webhook",
+    "description": "Webhook for updating and rebuilding a PHP application",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shea\\DeployWebhook\\": "src/"
+        },
+        "files": [
+            "src/config.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Shea Bunge",
+            "email": "shea@sheabunge.com"
+        }
+    ],
+    "require": {}
+}
