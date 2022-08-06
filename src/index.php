@@ -18,6 +18,10 @@ if ( empty( WORKING_DIR ) || ! is_dir( WORKING_DIR ) ) {
 $webhook = new Webhook( SECRET_TOKEN );
 $webhook->verify_signature();
 
+if ( ! $webhook->is_push_event() ) {
+	trigger_error( 'Only responds to push events', E_USER_ERROR );
+}
+
 echo 'Changing directory to ', WORKING_DIR, "\n";
 if ( ! chdir( WORKING_DIR ) ) {
 	trigger_error( 'Error when changing directory', E_USER_ERROR );

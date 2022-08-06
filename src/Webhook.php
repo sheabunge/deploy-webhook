@@ -16,6 +16,14 @@ class Webhook {
 		return 'sha256=' . hash_hmac( 'sha256', $payload, $secret_token );
 	}
 
+	public function get_event() {
+		return isset( $_SERVER['X-GitHub-Event'] ) ? $_SERVER['X-GitHub-Event'] : null;
+	}
+
+	public function get_signature() {
+		return isset( $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ) ? $_SERVER['HTTP_X_HUB_SIGNATURE_256'] : null;
+	}
+
 	public function verify_signature() {
 		$payload = file_get_contents( 'php://input' );
 
@@ -25,7 +33,7 @@ class Webhook {
 
 		$signature = $this->calculate_signature( $this->secret_token, $payload );
 
-		if ( ! isset( $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ) || ! hash_equals( $_SERVER['HTTP_X_HUB_SIGNATURE_256'], $signature ) ) {
+		if ( ! hash_equals( $this->get_signature(), $signature ) ) {
 			trigger_error( "Invalid signature $signature", E_USER_ERROR );
 		}
 
@@ -34,5 +42,9 @@ class Webhook {
 
 	public function get_data() {
 		return $this->data;
+	}
+
+	public function is_push_event() {
+		return 'push' === $this->get_event();
 	}
 }
